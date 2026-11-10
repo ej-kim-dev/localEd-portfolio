@@ -16,7 +16,6 @@ the evidence, and a runnable demo of the next document-processing step.
 | **Evidence: what is measured and what is not** | [docs/evidence.md](docs/evidence.md) |
 | **Runnable demo: rubric extraction with sources, validation and teacher approval** | [demo/](demo/README.md) |
 | **Extraction benchmark: 12 synthetic cases incl. Korean, with both runs reported** | [demo/benchmark/](demo/benchmark/README.md) |
-| **Video script (2–3 min)** | [docs/demo-video-script.md](docs/demo-video-script.md) |
 | **Backlog** | [docs/backlog.md](docs/backlog.md) |
 
 ![Architecture](docs/architecture.svg)
