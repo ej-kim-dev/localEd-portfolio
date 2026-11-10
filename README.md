@@ -22,12 +22,14 @@ the evidence, and a runnable demo of the next document-processing step.
 
 - **Document knowledge base:** reads the school's files (Google Docs/Sheets/Slides, PDF with OCR
   fallback, DOCX/PPTX/XLSX/HWPX, legacy HWP/DOC/XLS/PPT, images, recordings), indexes them
-  locally and answers teachers' questions with numbered, validated citations.
+  locally and answers teachers' questions with numbered source references. Citation IDs are
+  checked; source support still needs review.
 - **Agent with tools:** a local LLM (Qwen via Ollama) chooses among tools: search, read,
   transcribe, grade, check jobs, save as Google Doc. Safety rules live in code, not in the prompt.
 - **Oral assessments:** Whisper (MLX) transcription with word timestamps, teacher-Q&A detection,
   speaker diarization, and rubric-based, quote-verified feedback, always labelled
-  *AI-suggested, pending teacher review*.
+  *AI-suggested, pending teacher review*. The configured rubric is a placeholder for a
+  different assessment; validated grading and the production teacher-approval gate are incomplete.
 - **Operations:** runs as a background service; Pub/Sub pull (no inbound ports); allow-listed
   Drive folders; logs without student content; anonymized run log; an evaluation module (WER/CER,
   speaker attribution); 225 automated tests.

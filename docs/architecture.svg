@@ -42,7 +42,7 @@
   <rect class="box" x="600" y="60" width="365" height="78" rx="6"/>
   <text x="612" y="81" class="h">Agent loop (local LLM, tool calling)</text>
   <text x="612" y="99" class="s">Qwen via Ollama chooses tools; safety rules stay in code:</text>
-  <text x="612" y="115" class="s">citations renumbered/validated, quotes checked word-for-word,</text>
+  <text x="612" y="115" class="s">citation IDs checked; approximate quote matching + warnings,</text>
   <text x="612" y="131" class="s">re-prompt if it claims an action no tool performed</text>
 
   <!-- tools row -->
@@ -95,7 +95,7 @@
   <rect class="box" x="265" y="490" width="700" height="110" rx="6"/>
   <text x="277" y="511" class="h">Outputs written back to Drive</text>
   <text x="277" y="531" class="s">cited answers in Chat · speaker-labelled transcript Doc + timestamped Sheet · AI-suggested feedback Doc</text>
-  <text x="277" y="549" class="s">· drafts saved as Google Docs, shared only with the requesting teacher</text>
+  <text x="277" y="549" class="s">· drafts saved as Google Docs; requester access added, subject to Drive permissions</text>
   <text x="277" y="575" class="s" font-style="italic">Not yet validated: transcription accuracy against human references, speaker attribution,</text>
   <text x="277" y="591" class="s" font-style="italic">grading agreement with teachers, Korean recordings. See docs/evidence.md.</text>
 

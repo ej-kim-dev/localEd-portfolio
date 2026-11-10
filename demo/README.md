@@ -5,7 +5,7 @@ extraction → validation → document outputs → teacher approval gate before 
 
 ```bash
 python3 -m rubric_pipeline demo                        # whole workflow, about 1 second
-python3 -m unittest discover -s tests -v               # 15 tests
+python3 -m unittest discover -s tests -v               # 16 tests
 python3 -m rubric_pipeline extract sample_drive/allowed/assessment/speaking_rubric_synthetic.docx
 python3 -m rubric_pipeline approve out/speaking_rubric_synthetic.json --by "Ms Teacher"
 python3 -m rubric_pipeline check-gate out/speaking_rubric_synthetic.json
@@ -23,7 +23,7 @@ Python 3.10+ and the standard library only. Run the commands from this `demo/` f
 | Extraction | table-aware DOCX reader with cell-level sources (**real; this is the new part**) | today's reader flattens tables (see below) |
 | Validation | explicit rules, located errors (**real**) | not yet present |
 | Outputs | JSON, localEd-format Markdown, HTML review page (**real, local files**) | uploaded as Google Docs |
-| Approval gate | SHA-256 fingerprint of the approved file (**real logic**, typed teacher name) | teacher = signed-in Chat user (to build) |
+| Approval gate | SHA-256 fingerprint of the structured JSON (**real logic**, typed teacher name) | teacher = signed-in Chat user (to build) |
 | Language model | **not used**: extraction is deterministic | local LLM chooses tools and grades |
 
 ## Why this step
@@ -50,7 +50,7 @@ text, and no student or school data is included.
 
 ## Known limits
 
-- One table layout is recognised (marks row + descriptor row). Rubrics with one row per band, or
-  with vertically merged cells, are reported as unrecognised rather than parsed.
+- One table layout is recognised (marks row + descriptor row). Detected vertical merges and
+  other extraction warnings block approval. The reader does not detect every unsupported feature.
 - `.docx` only. PDF and scanned rubrics would need a layout-aware parser.
 - Retrieval is keyword-based; it demonstrates the citation contract, not search quality.

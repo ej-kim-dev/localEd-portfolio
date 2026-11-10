@@ -22,6 +22,10 @@ def validate(r: ExtractedRubric) -> list[Finding]:
     err = lambda m: out.append(Finding("ERROR", m))  # noqa: E731
     warn = lambda m: out.append(Finding("WARNING", m))  # noqa: E731
 
+    # Extraction warnings mean the source may be incomplete or structurally ambiguous.
+    # Do not allow approval of a partial interpretation of an unsupported layout.
+    for warning in r.warnings:
+        err(warning)
     if not r.criteria:
         err("No criteria were found.")
         return out
@@ -49,8 +53,6 @@ def validate(r: ExtractedRubric) -> list[Finding]:
     elif r.declared_total != r.total:
         err(f"The document says the total is /{r.declared_total} ({r.declared_total_ref}), "
             f"but the criteria add up to /{r.total}.")
-    for w in r.warnings:
-        warn(w)
     return out
 
 

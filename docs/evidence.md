@@ -37,7 +37,7 @@ behaviour under concurrent load or at production scale.
 | Check | Result | Scope |
 |---|---|---|
 | localEd automated test suite | **225 passed**, 1 skipped | Linux, Python 3.13, 10 Nov 2026, private repo commit `cc8757a`. macOS-only parts (MLX Whisper, Vision OCR) are not exercised on Linux. |
-| This portfolio's demo tests | **15 passed** | `python -m unittest discover -s tests` in `demo/`, standard library only |
+| This portfolio's demo tests | **16 passed** | `python3 -m unittest discover -s tests` in `demo/`, standard library only |
 | Demo output loads in localEd's real rubric loader | **Yes**: 4 criteria, total 30, no placeholders | checked against private commit `cc8757a` |
 | Demo's generated Word file opens in LibreOffice | **Yes** | LibreOffice headless conversion |
 

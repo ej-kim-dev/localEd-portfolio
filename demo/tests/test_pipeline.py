@@ -146,6 +146,23 @@ class ApprovalGate(Base):
         with self.assertRaises(approval.NotApproved):
             approval.approve(self.json, "  ", has_errors=False)
 
+    def test_vertical_merge_blocks_approval_even_when_criteria_are_recognized(self):
+        path = self.files["good"]
+        with zipfile.ZipFile(path) as z:
+            entries = [(info, z.read(info.filename)) for info in z.infolist()]
+        with zipfile.ZipFile(path, "w") as z:
+            for info, content in entries:
+                if info.filename == "word/document.xml":
+                    content = content.replace(b"<w:tcPr>", b'<w:tcPr><w:vMerge w:val="restart"/>', 1)
+                z.writestr(info, content)
+        rubric = extract_rubric(read_docx(path))
+        self.assertEqual(len(rubric.criteria), 4)
+        findings = validate(rubric)
+        self.assertTrue(any(f.level == "ERROR" and "vertically merged" in f.message for f in findings))
+        output = render.write_json(rubric, self.dir / "merged.json")
+        with self.assertRaises(approval.NotApproved):
+            approval.approve(output, "Teacher", has_errors(validate(rubric)))
+
 
 class Outputs(Base):
     def test_markdown_matches_the_localed_rubric_format(self):
