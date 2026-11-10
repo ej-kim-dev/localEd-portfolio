@@ -3,6 +3,7 @@ body { font-family: Inter, "Helvetica Neue", Arial, sans-serif; font-size: 9.6pt
 header h1.title { font-size: 15.5pt; margin: 0 0 2pt 0; }
 header p.author { color: #555; margin: 0 0 6pt 0; font-size: 9pt; }
 h2 { font-size: 11.2pt; margin: 9pt 0 3pt 0; color: #0b3d91; border-bottom: 1px solid #dde; padding-bottom: 1pt; }
-p { margin: 3pt 0; } ul, ol { margin: 3pt 0 3pt 15pt; padding: 0; } li { margin: 1.5pt 0; }
+p { margin: 3pt 0; } ul, ol { margin: 3pt 0 3pt 15pt; padding: 0; } li { margin: 1.5pt 0; break-inside: avoid; }
 figure { margin: 4pt 0; } figcaption { display: none; } img { width: 100%; }
 code { font-size: 8.6pt; background: #f3f3f5; padding: 0 2pt; }
+img[alt="localEd architecture"] { display: none; }
