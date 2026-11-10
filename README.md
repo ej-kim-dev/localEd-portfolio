@@ -42,12 +42,12 @@ the evidence, and a runnable demo of the next document-processing step.
 - **Not yet measured:** accuracy against human-checked transcripts, grading agreement with teachers,
   Korean recordings, and teacher time saved. No accuracy figure is claimed until those exist.
 
-## Run the demo (2 minutes, Python 3.10+, no installs)
+## Run the demo (2 minutes, Python 3.10+ (`python3`), no installs)
 
 ```bash
 cd demo
-python -m rubric_pipeline demo
-python -m unittest discover -s tests -v
+python3 -m rubric_pipeline demo
+python3 -m unittest discover -s tests -v
 ```
 
 It uses synthetic files only, written for this repository. No student, staff or school data

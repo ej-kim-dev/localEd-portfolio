@@ -4,11 +4,11 @@
 extraction → validation → document outputs → teacher approval gate before any grading.
 
 ```bash
-python -m rubric_pipeline demo                        # whole workflow, about 1 second
-python -m unittest discover -s tests -v               # 15 tests
-python -m rubric_pipeline extract sample_drive/allowed/assessment/speaking_rubric_synthetic.docx
-python -m rubric_pipeline approve out/speaking_rubric_synthetic.json --by "Ms Teacher"
-python -m rubric_pipeline check-gate out/speaking_rubric_synthetic.json
+python3 -m rubric_pipeline demo                        # whole workflow, about 1 second
+python3 -m unittest discover -s tests -v               # 15 tests
+python3 -m rubric_pipeline extract sample_drive/allowed/assessment/speaking_rubric_synthetic.docx
+python3 -m rubric_pipeline approve out/speaking_rubric_synthetic.json --by "Ms Teacher"
+python3 -m rubric_pipeline check-gate out/speaking_rubric_synthetic.json
 ```
 
 Python 3.10+ and the standard library only. Run the commands from this `demo/` folder.
