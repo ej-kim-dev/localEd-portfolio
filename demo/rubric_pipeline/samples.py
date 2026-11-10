@@ -1,7 +1,7 @@
 """Create the synthetic sample "Drive" used by the demo (standard library only).
 
 All content is invented for this demo. The descriptors are original wording written for this
-portfolio; they are NOT the IB's descriptors and contain no student or school data.
+portfolio; they are not taken from any exam board and contain no student or school data.
 
     sample_drive/allowed/assessment/speaking_rubric_synthetic.docx      valid rubric, /30
     sample_drive/allowed/assessment/speaking_rubric_draft_errors.docx   broken on purpose
@@ -59,7 +59,7 @@ The assessment has a preparation time, a presentation and a discussion.
 - Preparation: 10 minutes with one picture; up to 10 bullet points of notes.
 - Presentation: 1-2 minutes describing the picture and linking it to one theme.
 - Discussion: 2-3 minutes of questions from the teacher about the presentation and theme.
-Grading uses the speaking assessment rubric (total /30). Nothing after 5 minutes is graded.
+Teachers assess with the speaking assessment rubric (total /30). Nothing after 5 minutes is assessed.
 """
 
 RESTRICTED = """# Marks (synthetic, restricted)

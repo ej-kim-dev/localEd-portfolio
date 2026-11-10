@@ -95,7 +95,7 @@ class Validate(Base):
         crit[1][0] = "A"
         path = write_docx(self.dir / "dup.docx", "Rubric Total: /30", rubric_rows(crit))
         messages = " ".join(f.message for f in validate(extract_rubric(read_docx(path))))
-        self.assertIn("strictly increase", messages)
+        self.assertIn("without repeats", messages)
         self.assertIn("appears more than once", messages)
 
 
@@ -131,7 +131,7 @@ class ApprovalGate(Base):
         self.rubric = extract_rubric(read_docx(self.files["good"]))
         self.json = render.write_json(self.rubric, self.dir / "rubric.json")
 
-    def test_grading_requires_approval_of_the_exact_file(self):
+    def test_use_requires_approval_of_the_exact_file(self):
         with self.assertRaises(approval.NotApproved):
             approval.require_approval(self.json)
         approval.approve(self.json, "Teacher", has_errors(validate(self.rubric)))

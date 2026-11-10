@@ -1,0 +1,259 @@
+{
+ "cases": [
+  {
+   "case": "baseline",
+   "description": "the demo layout",
+   "errors": [],
+   "values": [
+    57,
+    57
+   ],
+   "sources": [
+    52,
+    52
+   ],
+   "planted_errors": [
+    0,
+    0
+   ],
+   "false_alarms": 0,
+   "pass": true
+  },
+  {
+   "case": "blank-rows",
+   "description": "empty rows between criteria",
+   "errors": [],
+   "values": [
+    57,
+    57
+   ],
+   "sources": [
+    52,
+    52
+   ],
+   "planted_errors": [
+    0,
+    0
+   ],
+   "false_alarms": 0,
+   "pass": true
+  },
+  {
+   "case": "merged-header",
+   "description": "a title row merged across the whole table",
+   "errors": [],
+   "values": [
+    57,
+    57
+   ],
+   "sources": [
+    52,
+    52
+   ],
+   "planted_errors": [
+    0,
+    0
+   ],
+   "false_alarms": 0,
+   "pass": true
+  },
+  {
+   "case": "multi-paragraph",
+   "description": "descriptors split over two paragraphs in one cell",
+   "errors": [],
+   "values": [
+    57,
+    57
+   ],
+   "sources": [
+    52,
+    52
+   ],
+   "planted_errors": [
+    0,
+    0
+   ],
+   "false_alarms": 0,
+   "pass": true
+  },
+  {
+   "case": "second-table",
+   "description": "an unrelated schedule table before the rubric",
+   "errors": [],
+   "values": [
+    57,
+    57
+   ],
+   "sources": [
+    52,
+    52
+   ],
+   "planted_errors": [
+    0,
+    0
+   ],
+   "false_alarms": 0,
+   "pass": true
+  },
+  {
+   "case": "korean",
+   "description": "Korean names and descriptors, total written as 총점",
+   "errors": [],
+   "values": [
+    57,
+    57
+   ],
+   "sources": [
+    52,
+    52
+   ],
+   "planted_errors": [
+    0,
+    0
+   ],
+   "false_alarms": 0,
+   "pass": true
+  },
+  {
+   "case": "four-bands",
+   "description": "one criterion with four bands (3/6/9/12)",
+   "errors": [],
+   "values": [
+    53,
+    53
+   ],
+   "sources": [
+    48,
+    48
+   ],
+   "planted_errors": [
+    0,
+    0
+   ],
+   "false_alarms": 0,
+   "pass": true
+  },
+  {
+   "case": "descending",
+   "description": "bands listed highest first (12 … 2)",
+   "errors": [],
+   "values": [
+    57,
+    57
+   ],
+   "sources": [
+    52,
+    52
+   ],
+   "planted_errors": [
+    0,
+    0
+   ],
+   "false_alarms": 0,
+   "pass": true
+  },
+  {
+   "case": "wrong-total",
+   "description": "document states /40 but criteria add up to /30",
+   "errors": [
+    "The document says the total is /40 (paragraph 1), but the criteria add up to /30."
+   ],
+   "values": [
+    57,
+    57
+   ],
+   "sources": [
+    52,
+    52
+   ],
+   "planted_errors": [
+    1,
+    1
+   ],
+   "false_alarms": 0,
+   "pass": true
+  },
+  {
+   "case": "missing-descriptor",
+   "description": "one empty descriptor cell",
+   "errors": [
+    "Criterion B2: the 2-mark band has no descriptor (table 1, row 5, column 3)."
+   ],
+   "values": [
+    57,
+    57
+   ],
+   "sources": [
+    52,
+    52
+   ],
+   "planted_errors": [
+    1,
+    1
+   ],
+   "false_alarms": 0,
+   "pass": true
+  },
+  {
+   "case": "duplicate-descriptor",
+   "description": "a copy-pasted descriptor",
+   "errors": [
+    "Criterion C: two bands have identical descriptors (copy-paste error?)."
+   ],
+   "values": [
+    57,
+    57
+   ],
+   "sources": [
+    52,
+    52
+   ],
+   "planted_errors": [
+    1,
+    1
+   ],
+   "false_alarms": 0,
+   "pass": true
+  },
+  {
+   "case": "vertical",
+   "description": "one row per band (layout not supported)",
+   "errors": [
+    "No criteria were found."
+   ],
+   "values": [
+    0,
+    0
+   ],
+   "sources": [
+    0,
+    0
+   ],
+   "refusal_ok": true,
+   "pass": true
+  }
+ ],
+ "summary": {
+  "cases_passed": [
+   12,
+   12
+  ],
+  "values": [
+   623,
+   623
+  ],
+  "sources": [
+   568,
+   568
+  ],
+  "planted_errors_detected": [
+   3,
+   3
+  ],
+  "false_alarms": 0,
+  "refusals_ok": [
+   1,
+   1
+  ]
+ }
+}

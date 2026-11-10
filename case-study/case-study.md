@@ -5,21 +5,21 @@ author: "Eun Johng Kim · Case study · November 2026"
 
 ## The problem
 
-Teachers at an IB international school in Korea run oral assessments (about 240 recordings a
+Teachers at a private school in Korea run oral assessments (about 240 recordings a
 year are planned: ~180 English, ~60 Korean) and live in a sea of school documents: rubrics,
 guidelines, policies, forms, many of them Word, PDF or Hangul (HWP) files. Transcribing a
-recording, finding the right rubric, and writing feedback against it are slow, repetitive jobs.
+recording, finding the right rubric, and collecting evidence against it are slow, repetitive jobs.
 Cloud AI tools were not an option for student recordings and records, and teachers will not
 adopt a new app. **Goal:** a teacher types a request in Google Chat, and the work happens on a
-machine inside the school, with every output traceable and nothing graded without a teacher.
+machine inside the school, with every output traceable. Teachers do the assessing; the system
+prepares the material they need.
 
 ## What I did
 
 I am a Computer Science and English teacher. I own this project end to end: I defined the
 workflow, set the privacy rules, chose the architecture, and decided what
-"done" means. I built it with AI coding agents (Claude Code and Codex) under my direction:
-I specified each change, reviewed and tested it, and deployed it on the school's Mac Studio. I
-also set up the evaluation: what to measure, on which data, and which claims are not yet allowed.
+"done" means. I specified, reviewed and tested every change, and deployed it on the school's
+Mac Studio. I also set up the evaluation: what to measure, on which data, and which claims are not yet allowed.
 
 ## Architecture and key decisions
 
@@ -33,9 +33,9 @@ also set up the evaluation: what to measure, on which data, and which claims are
   for scanned pages, DOCX/PPTX/XLSX/HWPX parsed with the standard library, legacy HWP/DOC/XLS/PPT,
   images and recordings. Text is chunked and indexed (SQLite FTS5 + vectors) for hybrid search.
 - **Code enforces the rules; the model doesn't.** Answers must cite numbered sources, and the code
-  renumbers and validates them. Quoted text is checked word-for-word against the source. Marks
-  are clamped to the rubric and graded three times (median kept). Every AI mark is labelled
-  "AI-suggested, pending teacher review". The agent is re-prompted if it claims an action
+  renumbers and validates them. Quoted text is checked word-for-word against the source. Any
+  rubric-based comment the model drafts is labelled "AI-suggested, pending teacher review": it is
+  material for the teacher, never a mark. The agent is re-prompted if it claims an action
   that no tool actually performed.
 - **Access and privacy:** Drive folders are allow-listed (knowledge folders are read-only).
   Results are shared only with the requesting teacher. Logs record counts, timings and error
@@ -66,8 +66,8 @@ accuracy figure until a teacher-verified reference set exists (details: `docs/ev
 - **One recording got no Q&A boundary**, even though its own transcript contained the teacher's
   questions. It is the first regression test on the backlog.
 - **The configured rubric was a placeholder for a different assessment** (/40 instead of /30).
-  The benchmark refused to grade, and that exposed a bigger issue: grading should never start
-  from an unchecked rubric.
+  Nothing was scored, and that exposed a bigger issue: no rubric should be used until a teacher
+  has checked it.
 - **Speech recognition can "correct" learner grammar** ("they wearing" → "they are wearing"),
   which would distort a Language criterion. Transcripts for assessment must be word-for-word,
   and that has to be measured, not assumed.
@@ -84,11 +84,12 @@ band marks separated from their descriptors. The demo in this repository fixes t
    source cell (e.g. *table 1, row 2, column 4*).
 3. **Validate** with explicit rules: bands must increase, every band needs a descriptor, no
    duplicates, and the total must match the document. A broken draft yields three located errors.
-4. **Require teacher approval** of the exact file (SHA-256 fingerprint) before grading may run.
+4. **Require teacher approval** of the exact file (SHA-256 fingerprint) before the rubric can be used.
    Any later edit voids the approval.
 
-It is deterministic, uses only the standard library, and has 15 tests. Its output loads
-unchanged in localEd's grader format. **Next:** a small extraction benchmark (field-level exact
-match and source-reference correctness on synthetic and public rubrics and forms), then the
-same pattern for other school forms. In time, a layout-aware document parser could replace the
+It is deterministic, uses only the standard library, and its output loads unchanged in localEd's
+rubric format. A 12-case synthetic benchmark (Korean, merged cells, descending marks, planted
+errors, an unsupported layout) found two bugs on its first run (10/12). Both are fixed (12/12),
+and both runs are reported. **Next:** public rubrics and forms (PDF, scans, HWP) with
+hand-checked expected output, then the same pattern for other school forms. In time, a layout-aware document parser could replace the
 hand-written reader where scans and complex layouts need it.

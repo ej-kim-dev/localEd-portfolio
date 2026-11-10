@@ -22,7 +22,7 @@ from dataclasses import asdict, dataclass, field
 from rubric_pipeline.docx_tables import Cell, DocxContent
 
 _KEY = re.compile(r"^[A-Z][0-9]?$")
-_TOTAL = re.compile(r"total\s*:?\s*/\s*(\d+)", re.IGNORECASE)
+_TOTAL = re.compile(r"(?:total|총점)\s*:?\s*/\s*(\d+)", re.IGNORECASE)
 
 
 @dataclass
