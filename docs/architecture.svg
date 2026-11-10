@@ -66,9 +66,9 @@
   <text x="512" y="293" class="s">audio deleted after decoding</text>
 
   <rect class="box" x="735" y="170" width="230" height="150" rx="6"/>
-  <text x="747" y="191" class="h">Rubric-based feedback</text>
+  <text x="747" y="191" class="h">Rubric evidence for teachers</text>
   <text x="747" y="209" class="s">rubric loaded from a file</text>
-  <text x="747" y="225" class="s">each criterion graded 3×, median</text>
+  <text x="747" y="225" class="s">drafted 3× per criterion, median kept</text>
   <text x="747" y="241" class="s">quotes verified against transcript</text>
   <text x="747" y="257" class="s">marks clamped to the rubric</text>
   <text x="747" y="277" class="s">labelled "AI-SUGGESTED,</text>
@@ -80,7 +80,7 @@
   <text x="747" y="384" class="s">table-aware rubric extraction</text>
   <text x="747" y="400" class="s">with cell-level sources,</text>
   <text x="747" y="416" class="s">validation, and teacher approval</text>
-  <text x="747" y="432" class="s">before grading may run</text>
+  <text x="747" y="432" class="s">before the rubric can be used</text>
   <text x="747" y="452" class="s" font-style="italic">(demo/ in this repository)</text>
 
   <!-- cross-cutting -->
@@ -97,7 +97,7 @@
   <text x="277" y="531" class="s">cited answers in Chat · speaker-labelled transcript Doc + timestamped Sheet · AI-suggested feedback Doc</text>
   <text x="277" y="549" class="s">· drafts saved as Google Docs, shared only with the requesting teacher</text>
   <text x="277" y="575" class="s" font-style="italic">Not yet validated: transcription accuracy against human references, speaker attribution,</text>
-  <text x="277" y="591" class="s" font-style="italic">grading agreement with teachers, Korean recordings. See docs/evidence.md.</text>
+  <text x="277" y="591" class="s" font-style="italic">agreement with teachers' judgments, Korean recordings. See docs/evidence.md.</text>
 
   <!-- arrows -->
   <path class="ln" d="M120 150 L120 165"/>

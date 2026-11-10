@@ -3,7 +3,7 @@
     python -m rubric_pipeline demo                 # the whole workflow, step by step
     python -m rubric_pipeline extract FILE.docx    # extract + validate one rubric
     python -m rubric_pipeline approve OUT.json --by "Ms Teacher"
-    python -m rubric_pipeline check-gate OUT.json  # would grading be allowed?
+    python -m rubric_pipeline check-gate OUT.json  # may this rubric be used?
 
 Everything runs locally on synthetic files. Nothing is sent anywhere.
 """
@@ -24,7 +24,7 @@ from rubric_pipeline.samples import DEMO_DIR, DRIVE, make_samples
 from rubric_pipeline.validate import has_errors, validate
 
 OUT = DEMO_DIR / "out"
-PENDING = "PENDING TEACHER APPROVAL - not usable for grading yet"
+PENDING = "PENDING TEACHER APPROVAL - not usable yet"
 
 
 def step(n: int, title: str, kind: str) -> None:
@@ -56,7 +56,7 @@ def demo() -> int:
         shutil.rmtree(OUT)
     make_samples()
     allowed = [DRIVE / "allowed"]
-    request = "Please prepare the speaking assessment rubric for grading"
+    request = "Please prepare the speaking assessment rubric so I can use it"
 
     step(1, "Teacher request", "simulated chat message")
     print(f'    "{request}"')
@@ -96,26 +96,26 @@ def demo() -> int:
         try:
             approval.require_approval(path)
         except approval.NotApproved as exc:
-            print(f"    {path.stem}: grading blocked - {exc}")
+            print(f"    {path.stem}: use blocked - {exc}")
     try:
         approval.approve(bad_json, "Ms Teacher (synthetic)", bad_errors)
     except approval.NotApproved as exc:
         print(f"    approving the broken draft is refused: {exc}")
     approval.approve(good_json, "Ms Teacher (synthetic)", good_errors)
     record = approval.require_approval(good_json)
-    print(f"    {good_json.stem}: approved by {record['approved_by']}; grading allowed")
+    print(f"    {good_json.stem}: approved by {record['approved_by']}; use allowed")
     good_json.write_text(good_json.read_text(encoding="utf-8").replace('"max_marks": 12', '"max_marks": 14'),
                          encoding="utf-8")
     try:
         approval.require_approval(good_json)
     except approval.NotApproved as exc:
-        print(f"    after an edit to the approved file: grading blocked - {exc}")
+        print(f"    after an edit to the approved file: use blocked - {exc}")
 
     step(7, "Requested documents", "local files; localEd would upload these to Google Docs")
     for p in sorted(OUT.iterdir()):
         print(f"    {p.relative_to(DEMO_DIR)}")
     print("\nNot shown here (needs the private system): the local LLM agent choosing these tools, "
-          "Google Drive/Docs/Chat, and grading itself.")
+          "and Google Drive/Docs/Chat.")
     return 0
 
 
@@ -143,9 +143,9 @@ def main(argv: list[str] | None = None) -> int:
     if args.cmd == "check-gate":
         try:
             r = approval.require_approval(args.json)
-            print(f"grading allowed (approved by {r['approved_by']})"); return 0
+            print(f"rubric use allowed (approved by {r['approved_by']})"); return 0
         except approval.NotApproved as exc:
-            print(f"grading blocked: {exc}"); return 1
+            print(f"rubric use blocked: {exc}"); return 1
     return 2
 
 

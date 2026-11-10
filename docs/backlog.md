@@ -11,7 +11,7 @@ None of these are needed before applying. Ordered by value for the Document AI d
 | 5 | **Human-verified English/Korean transcription evaluation** | With school approval: teachers correct 10 English + 10 Korean transcripts while listening (post-edited references, bias noted), and 2–3 are transcribed from scratch. Report WER (English) and CER (Korean) with exact scope. The evaluation module for this already exists in localEd. | 2–3 weeks of teacher time |
 
 Smaller items found along the way:
-- Teacher approval tied to the signed-in Chat user, and grading refusing unapproved rubrics,
+- Teacher approval tied to the signed-in Chat user, and every rubric-based step refusing unapproved rubrics,
   inside localEd itself (the demo's gate, integrated).
 - Replace the placeholder rubric on the server with the extracted, approved speaking rubric.
 - The Whisper hint only reaches the first 30 seconds of audio; measure whether a hint helps at

@@ -34,8 +34,10 @@ def validate(r: ExtractedRubric) -> list[Finding]:
         marks = [b.marks for b in c.bands]
         if len(marks) < 2:
             err(f"Criterion {c.key} has fewer than two mark bands.")
-        if marks != sorted(set(marks)):
-            err(f"Criterion {c.key}: band marks must strictly increase, found {marks}.")
+        # Rubrics list bands lowest-first or highest-first; either is fine if consistent.
+        if marks not in (sorted(set(marks)), sorted(set(marks), reverse=True)):
+            err(f"Criterion {c.key}: band marks must go up (or down) steadily without repeats, "
+                f"found {marks}.")
         for b in c.bands:
             if not b.descriptor:
                 err(f"Criterion {c.key}: the {b.marks}-mark band has no descriptor ({b.marks_ref}).")

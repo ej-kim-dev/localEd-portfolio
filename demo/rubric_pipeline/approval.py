@@ -1,7 +1,7 @@
-"""Teacher approval gate: grading may only use a rubric a teacher has approved, unchanged.
+"""Teacher approval gate: a rubric may only be used once a teacher has approved it, unchanged.
 
 Approval stores a SHA-256 fingerprint of the exact structured rubric. If the rubric file is
-edited afterwards, the fingerprint no longer matches and grading is refused until a teacher
+edited afterwards, the fingerprint no longer matches and its use is refused until a teacher
 approves the new version. (In this demo the teacher's name is typed on the command line; in
 localEd the approving teacher would be the signed-in Google Chat user.)
 """

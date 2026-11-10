@@ -6,9 +6,9 @@ information.
 
 ## 1. Pilot benchmark: five English oral-assessment recordings (10 Nov 2026)
 
-**Scope.** Five practice (Pre-DP) English B speaking assessments, 24 min 15.36 s of audio in total,
+**Scope.** Five practice English speaking assessments, 24 min 15.36 s of audio in total,
 processed once each on the school's Apple M4 Max (36 GiB RAM) with models already cached.
-Run and reported by a separate benchmark agent (Codex), not by me by hand.
+Scripted, single-pass benchmark; figures are taken from its report.
 
 | Measure | Result |
 |---|---|
@@ -25,11 +25,11 @@ Run and reported by a separate benchmark agent (Codex), not by me by hand.
 - Speaker blocks mixed teacher questions and student answers; speaker labels cannot yet be used to
   filter "student only" speech.
 - One recording got no Q&A boundary although its own transcript contains the teacher's questions.
-- The grading rubric configured on the server was a placeholder for a *different* assessment
-  (/40 instead of the speaking rubric's /30). Grading was therefore not run, and no marks were issued.
+- The rubric configured on the server was a placeholder for a *different* assessment
+  (/40 instead of the speaking rubric's /30). No rubric-based output was produced, and no marks were issued.
 
 **Not measured (do not infer these):** word error rate against a human reference, speaker-attribution
-accuracy, timing accuracy, grading agreement with teachers, teacher review time, Korean performance,
+accuracy, timing accuracy, agreement with teachers' judgments, teacher review time, Korean performance,
 behaviour under concurrent load or at production scale.
 
 ## 2. Software quality checks
@@ -37,7 +37,8 @@ behaviour under concurrent load or at production scale.
 | Check | Result | Scope |
 |---|---|---|
 | localEd automated test suite | **225 passed**, 1 skipped | Linux, Python 3.13, 10 Nov 2026, private repo commit `cc8757a`. macOS-only parts (MLX Whisper, Vision OCR) are not exercised on Linux. |
-| This portfolio's demo tests | **15 passed** | `python -m unittest discover -s tests` in `demo/`, standard library only |
+| This portfolio's demo tests | **16 passed** | `python3 -m unittest discover -s tests` in `demo/`, standard library only; also run by GitHub Actions on Ubuntu, macOS and Windows (Python 3.10 and 3.13) |
+| Rubric-extraction benchmark (synthetic) | **12/12 cases** after two fixes (first run: 10/12) | [demo/benchmark/](../demo/benchmark/README.md): 623 values, 568 source references, 3 planted errors, 0 false alarms; synthetic cases, not an estimate of real-world accuracy |
 | Demo output loads in localEd's real rubric loader | **Yes**: 4 criteria, total 30, no placeholders | checked against private commit `cc8757a` |
 | Demo's generated Word file opens in LibreOffice | **Yes** | LibreOffice headless conversion |
 
@@ -46,7 +47,7 @@ behaviour under concurrent load or at production scale.
 localEd's Word reader (built for search) turns a `.docx` into paragraphs. On the synthetic rubric in
 `demo/`, it produces **58 separate paragraphs**: the band marks (`2`, `4`, `6` …) end up far from the
 descriptors they belong to, so the table's meaning is lost. That is acceptable for keyword and
-vector search, but not for extracting a rubric that grading will depend on. The demo in this
+vector search, but not for extracting a rubric that teachers' assessment will depend on. The demo in this
 repository is the fix I am proposing: a table-aware reader that keeps every cell's position, so
 each extracted value can cite its source.
 
@@ -62,5 +63,6 @@ not a measurement, and Korean performance is untested.
 
 - No accuracy percentage for transcription (there is no human-verified reference yet).
 - No comparison claim against any commercial transcription service.
-- No claim of validated grading, bilingual (Korean) grading, or teacher time saved.
+- No claim that AI assesses students: teachers assess. No claim of validated AI-suggested
+  feedback, Korean-language use, or teacher time saved.
 - No claim of model training or fine-tuning: localEd uses existing open models.
